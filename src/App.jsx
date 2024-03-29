@@ -10,13 +10,13 @@ import {Routes, Route, BrowserRouter} from 'react-router-dom';
 const App = () => {
     return (
       <>
-         <main>
+  <main>
   <BrowserRouter>
   <Routes>
     <Route path ="/" element ={<Register/>}/>
     <Route path ="/register" element ={<Register/>}/>
     <Route path ="/login" element ={<Login/>}/>
-    <Route path ="/addjob" element ={<Addjob addSkills={addSkills} removeSkills = {removeSkills} formvalue = {formvalue}/>}/>
+    <Route path ="/addjob" element ={<Addjob/>}/>
     <Route path ="/mainpage" element ={<Mainpage/>}/>
     <Route path ="/homepg" element ={<Homepage/>}/>
     <Route path ="." element ={<h1>404 Route not found</h1>}/>
