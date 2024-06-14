@@ -24,11 +24,6 @@ const App = () => {
   </BrowserRouter>
   </main>
 
-
-     {/* <Register/> */}
-     {/* <Login/> */}
-     {/* <Addjob/> */}
-     {/* <Mainpage/> */}
       </>
     );
 }

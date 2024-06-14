@@ -79,8 +79,8 @@ const Addjob = () => {
       <div
         className="main"
         style={{
-          height: "100vh",
-          width: "100vw",
+          height: "100%",
+          width: "100%",
           display: "flex",
           flexDirection: "row",
         }}
@@ -94,12 +94,13 @@ const Addjob = () => {
             marginLeft: "40px",
           }}
         >
-          <h2>Add job description</h2>
+          <h1>Add job description</h1>
           <div>
-            <label htmlFor="Company Name">Company Name:</label>
+            <label htmlFor="Company Name">Company Name</label>
             <input
               type="text"
               placeholder="Enter your company name here"
+              style={{marginLeft:'30px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -112,10 +113,11 @@ const Addjob = () => {
           <br />
           <div>
             {" "}
-            <label htmlFor="Add logo URL">Add logo URL:</label>
+            <label htmlFor="Add logo URL">Add logo URL</label>
             <input
               type="text"
               placeholder="Enter job position"
+              style={{marginLeft:'39px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -131,6 +133,7 @@ const Addjob = () => {
             <input
               type="text"
               placeholder="Enter Amount in rupees"
+              style={{marginLeft:'53px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -142,10 +145,11 @@ const Addjob = () => {
           </div>
           <br />
           <div>
-            <label htmlFor="Monthly salary">Monthly salary:</label>
+            <label htmlFor="Monthly salary">Monthly salary</label>
             <input
               type="text"
               placeholder="Monthly salary"
+              style={{marginLeft:'38px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -161,6 +165,7 @@ const Addjob = () => {
             <select
               className="dropdown"
               placeholder="Select"
+              style={{marginLeft:'76px',height:'25px',width:'200px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -179,6 +184,7 @@ const Addjob = () => {
             <select
               className="dropdown"
               placeholder="Select"
+              style={{marginLeft:'72px',height:'25px',width:'200px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onChange={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -197,6 +203,7 @@ const Addjob = () => {
             <input
               type="text"
               placeholder="Job Description"
+              style={{marginLeft:'70px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onChange={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -212,6 +219,7 @@ const Addjob = () => {
             <input
               type="text"
               placeholder="Type the job description"
+              style={{marginLeft:'25px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -227,6 +235,7 @@ const Addjob = () => {
             <input
               type="text"
               placeholder="Type about your company"
+              style={{marginLeft:'20px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -242,6 +251,7 @@ const Addjob = () => {
             <select
               className="text"
               placeholder="Enter the must have skills"
+              style={{marginLeft:'27px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onChange={addSkills}
               value={formvalue.Skills}
             >
@@ -267,6 +277,7 @@ const Addjob = () => {
             <input
               type="text"
               placeholder="Enter the additional information"
+              style={{marginLeft:'50px',height:'25px',width:'400px',borderRadius:'5px',borderColor:'#C2C2C2'}}
               onInput={(e) =>
                 setFormValue({
                   ...formvalue,
@@ -278,10 +289,12 @@ const Addjob = () => {
           </div>
           <br />
           <div style={{ flexWrap: "wrap", marginLeft: "40%" }}>
-            <button type="submit">Cancel</button>
+            <button type="submit" 
+            style={{marginLeft:'100px',height:'30px',width:'100px',borderRadius:'5px',borderStyle:'none',color:'black'}}>Cancel</button>
+            
             <button
               type="submit"
-              style={{ marginLeft: "20px", background: "#ED5353" }}
+              style={{marginLeft:'20px',height:'30px',width:'100px',background:'#ED5353',borderRadius:'5px',borderStyle:'none',color:'white'}}
               onClick={handleAddJob}
             >
               + Add jobs
@@ -292,14 +305,14 @@ const Addjob = () => {
         <div className="right" style={{ display: "flex", float: "right" }}>
           <img
             src="second.png"
-            style={{ height: "600px", width: "600px", marginLeft: "60%" }}
+            style={{ height: "650px", width: "550px", marginLeft: "35%" }}
           />
           <div
             style={{
               position: "absolute",
-              marginLeft: "40%",
+              marginLeft: "25%",
               color: "white",
-              marginTop: "20px",
+              marginTop: "40px",
               fontSize: "20px",
             }}
           >

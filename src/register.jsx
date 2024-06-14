@@ -12,9 +12,11 @@ const Register = () => {
     Mobile: "",
   });
 
-  const handleInput = (event) => {
-    setFormValue({ ...formvalue, [event.target.name]: event.target.value });
-  };
+  // const handleInput = (event) => {
+   
+  //   setFormValue({ ...formvalue, [event.target.name]: event.target.value });
+  
+  // };
 
   const handleRegister = async () => {
     if (
@@ -28,62 +30,95 @@ const Register = () => {
     }
     if (!boxChecked) {
       alert("need to check the box");
-      return;
+    
     }
-    await UserRegistered(formvalue);
+    
+     await UserRegistered(formvalue);
+    
   };
 
   useEffect(() => {
     console.log(formvalue);
     console.log(boxChecked);
   }, [formvalue]);
+
+
   return (
     <>
       <div
         className="main"
         style={{
-          height: "100vh",
-          width: "100vw",
+          height: "100%",
+          width: "100%",
           display: "flex",
           flexDirection: "row",
         }}
       >
-        <div className="left" style={{ marginLeft: "50px" }}>
+        <div className="left" style={{ marginLeft: "50px",marginTop:'3%',marginLeft:'8%' }}>
           <h1>Create an account</h1>
-          <h3>Your personal job finder is here</h3>
+          <p style={{color:'#525252',fontFamily:'sans-serif'}}>Your personal job finder is here</p>
           <br />
-          <input type="text" placeholder="Name" onChange={handleInput}></input>
+          <input type="text" placeholder="Name"  
+          onInput={(e) =>
+            setFormValue({
+                  ...formvalue,
+                  Name: e.target.value,
+                })
+              }
+              value={formvalue.Name} style={{height:'35px',width:'400px',borderRadius:'6px',borderColor:'#C2C2C2'}}></input>
           <br />
           <br />
-          <input type="text" placeholder="Email" onChange={handleInput}></input>
+          <input type="text" placeholder="Email"   
+          onInput={(e) =>
+            setFormValue({
+                  ...formvalue,
+                  Email: e.target.value,
+                })
+              }
+              value={formvalue.Email}  style={{height:'35px',width:'400px',borderRadius:'6px',borderColor:'#C2C2C2'}}></input>
           <br />
           <br />
           <input
             type="text"
             placeholder="Mobile"
-            onChange={handleInput}
+            onInput={(e) =>
+              setFormValue({
+                    ...formvalue,
+                    Mobile: e.target.value,
+                  })
+                }
+                value={formvalue.Mobile} 
+            style={{height:'35px',width:'400px',borderRadius:'6px',borderColor:'#C2C2C2'}}
           ></input>
           <br />
           <br />
           <input
             type="text"
             placeholder="Password"
-            onChange={handleInput}
+            onInput={(e) =>
+              setFormValue({
+                    ...formvalue,
+                    Password: e.target.value,
+                  })
+                }
+                value={formvalue.Password} 
+            style={{height:'35px',width:'400px',borderRadius:'6px',borderColor:'#C2C2C2'}}
           ></input>
           <br />
-          <br />
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <br /><br/>
+          <div style={{ display: "flex",flexDirection:'row' }}>
+            <div>
             <input
               type="checkbox"
-              onChange={(event) => setBoxChecked(event.target.checked)}
-            ></input>
-            <p>
-              By creating an account, I agree to our terms of use and privacy
-              policy
-            </p>
-            <br />
+              onChange={(e) => setBoxChecked(e.target.checked)}
+            ></input></div>
+            <div style={{marginLeft:'10px'}}>
+              By creating an account, I agree to our terms of use and privacy policy
+            </div>
+       
           </div>
-          <button type="submit" onClick={handleRegister}>
+          <br/><br/>
+          <button type="submit" onClick={handleRegister} style={{height:'30px',width:'150px',background:'#ED5353',borderRadius:'5px',borderStyle:'none',color:'white'}}>
             Create Account
           </button>
           <br />
@@ -91,7 +126,7 @@ const Register = () => {
             Don’t have an account?
             <span
               className="signin"
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer",fontWeight:'bold'}}
               onClick={() => navigate("/login")}
             >
               SignIn
@@ -101,20 +136,20 @@ const Register = () => {
 
         <div
           className="right"
-          style={{ display: "flex", float: "right", marginLeft: "60px" }}
+          style={{ display: "flex", float: "right", marginLeft: "90px" }}
         >
           <img
             src="welcome-img.png"
-            style={{ height: "600px", width: "600px" }}
+            style={{ height: "620px", width: "750px",marginLeft:'20%' }}
           />
           <div
             className="text"
             style={{
               position: "absolute",
               color: "white",
-              marginLeft: "15%",
+              marginLeft: "25%",
               fontSize: "20px",
-              marginTop: "30px",
+              marginTop: "50px",
             }}
           >
             Your Personal Job Finder

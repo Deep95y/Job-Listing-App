@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import getJobdetail from "./authdetails";
 import { useNavigate } from "react-router";
 import getJobdetailbtid from "./authbyid";
+import './index.css';
+import { MdPeople } from 'react-icons/md';
+import { FaRupeeSign } from 'react-icons/fa';
 
 const Homepage = () => {
   const Skills = [
@@ -18,9 +21,12 @@ const Homepage = () => {
   const [skills, setSkills] = useState([]);
   const [title, setTitle] = useState("");
   const [jobs, setJobs] = useState([]);
-  const [token] = useState(localStorage.getItem("token"));
+  const [isLoggedIn] = useState(!!localStorage.getItem("token"));
   //   console.log("code");
   //   console.log(jobs);
+const[token] = useState(localStorage.getItem("token"));
+console.log(token);
+console.log(isLoggedIn);
   const handleSkills = (event) => {
     const array = skills.filter((skill) => skill === event.target.value);
     if (!array.length) {
@@ -34,9 +40,10 @@ const Homepage = () => {
   };
 
   const logout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
+    localStorage.removeItem('token');
+    window.location.href = '/';
+};
+
 
   const handleView = async (id) => {
     const result = await getJobdetailbtid(id);
@@ -73,17 +80,18 @@ const Homepage = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "100vw",
-          height: "100vh",
-          background: "#FFEEEE",
+          width: "100%",
+          height: "100%",
         }}
       >
         <div
           className="navbar"
           style={{
-            width: "1400px",
+            width: "1350px",
             height: "130px",
             borderRadius: "0px, 0px, 62px, 55px",
+            borderBottomLeftRadius: '40px',
+            borderBottomRightRadius:'40px',
             background: "#ED5353",
             display: "flex",
             flexDirection: "row",
@@ -99,40 +107,41 @@ const Homepage = () => {
           >
             Jobfinder
           </div>
-
-          <div style={{ marginLeft: "70%", marginTop: "20px", color: "white",cursor:'pointer'}}>
+          {!isLoggedIn && (
+          <div style={{marginLeft:'50%'}}><button style={{ marginLeft: "70%", marginTop: "20px", color: "white",cursor:'pointer',height:'25px',width:'100px',borderColor:'white',background:'#ED5353',borderRadius:'6px'}}>
             LogIn
+            </button>
           </div>
+          )}
+           {!isLoggedIn && (
           <div
-            style={{ marginLeft: "20px", marginTop: "20px", color: "white", cursor:'pointer'}}
+            style={{ marginLeft: "100px", marginTop: "20px", color: "white", cursor:'pointer',height:'25px',width:'100px',borderColor:'white',background:'white',borderRadius:'6px',color:'#ED5353',textAlign:'center'}}
           >
             Register
           </div>
-          {!!token ? (
+           )}
+          {isLoggedIn && (
           <div
-              style={{ marginLeft: "20px", marginTop: "20px", color: "white", cursor:'pointer' }}
+              style={{ marginLeft: "30px", marginTop: "20px", color: "white", cursor:'pointer' }}
             >
               Hello! Recruiter
             </div>
-            ) : (
-                ""
               )}
-          {!!token ? (
+          {isLoggedIn && (
             <div
               onClick={logout}
               style={{
                 height: "30px",
                 width: "100px",
                 color: "white",
-                marginLeft: "20px",
+                marginLeft: "30px",
                 marginTop: "20px",
                 cursor:'pointer'
               }}
             >
               Logout
             </div>
-          ) : (
-            ""
+    
           )}
         </div>
         <div>
@@ -146,7 +155,7 @@ const Homepage = () => {
               display: "flex",
               flexDirection: "column",
               borderColor: "#FF202040",
-              borderStyle: "hidden",
+              borderStyle: "inset",
               marginTop: "30px",
               marginLeft: "5%",
             }}
@@ -162,6 +171,7 @@ const Homepage = () => {
                 marginTop: "30px",
                 marginLeft: "7%",
                 borderRadius: "10px",
+                borderColor:'#9C9C9C'
               }}
             />
 
@@ -177,6 +187,7 @@ const Homepage = () => {
                   height: "30px",
                   width: "100px",
                   borderRadius: "10px",
+                  borderColor:'#9C9C9C'
                 }}
               >
                 <option value="">Skills</option>
@@ -191,14 +202,17 @@ const Homepage = () => {
             <br />
 
             <div className="Skills">
+              <div style={{display:'flex',flexDirection:'row'}}>
               {skills?.map((element, index) => (
-                <div key={index}>
-                  {element}&nbsp;
-                  <button style={{ background: "#ED5353",color:"white"}} onClick={() => removeSkills(element)}>X</button>
+                <div key={index} style={{marginLeft:'10px',height:'20px',width:'60px',background:'#FFEEEE',display:'flex',flexDirection:'row'}}>
+                  <div>{element}&nbsp;</div>
+                  <div><button style={{ background: "#ED5353",color:"white",borderStyle:'none',height:'20px',width:'20px'}} onClick={() => removeSkills(element)}>X</button></div>
                 </div>
               ))}
+              </div>
             </div>
-            <div style={{ marginLeft: "70%" }}>
+            <div style={{ display:'flex',flexDirection:'row',marginLeft:'70%' }}>
+              <div>
               <button
                 type="button"
                 style={{
@@ -206,13 +220,16 @@ const Homepage = () => {
                   color: "white",
                   height: "30px",
                   width: "100px",
+                  borderStyle:'none',
+                  borderRadius:'5px'
                 }}
                 onClick={fetchDetails}
               >
                 Apply Filter
               </button>
             </div>
-            <div style={{ marginLeft: "70%" }}>
+            {isLoggedIn && (
+            <div style={{ marginLeft:'10px'}}>
               <button
                 type="button"
                 style={{
@@ -220,26 +237,29 @@ const Homepage = () => {
                   color: "white",
                   height: "30px",
                   width: "100px",
+                  borderStyle:'none',
+                  borderRadius:'5px'
                 }}
                 onClick={handleAdd}
               >
                 + Add job
               </button>
             </div>
+           
+            )}
             <div
               style={{
-                marginLeft: "70%",
-                position: "absolute",
-                marginTop: "10%",
+               marginLeft:'10px'
               }}
             >
               <button
                 type="button"
-                style={{ background: "white", color: "#ED5353" }}
+                style={{ background: "white", color: "#ED5353",borderStyle:'none',marginTop:'5px' }}
                 onClick={handleClear}
               >
                 Clear
               </button>
+            </div>
             </div>
           </div>
         </div>
@@ -253,9 +273,10 @@ const Homepage = () => {
                 flexDirection: "row",
                 marginLeft: "10%",
                 width: "1000px",
-                height: "200px",
+                height: "160px",
                 borderRadius: "0px, 0px, 62px, 55px",
-                background: "lightblue",
+                borderLeftStyle:'inset',
+                borderLeftColor:'#ED5353',
                 marginTop: "30px",
               }}
             >
@@ -265,7 +286,7 @@ const Homepage = () => {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "30px",
+                    marginTop: "20px",
                     marginLeft: "20px",
                   }}
                 >
@@ -275,23 +296,24 @@ const Homepage = () => {
                   >
                     <img
                       src={data.LogoUrl}
-                      style={{ height: "40px", width: "40px" }}
+                      style={{ height: "60px", width: "60px" }}
                     />
-                    <div style={{ position: "absolute" }}>
+                    <div style={{ position: "absolute",color:'white' }}>
                       {data.CompanyName}
                     </div>
                   </div>
-                  <div>{data.Position}</div>
+                  <div style={{marginLeft:'50px',fontWeight:'bold'}}>{data.Position}</div>
                 </div>
                 <div style={{ display: "flex", flexDirection: "row" }}>
-                  <p style={{ marginLeft: "20px" }}>11-50</p>
-                  <p style={{ marginLeft: "20px" }}>{data.MonthlySalary}</p>
+                  <p style={{ marginLeft: "20px",color:'#9C9C9C' }}> <MdPeople size={15} color="blue" />11-50</p>
+                  <p style={{ marginLeft: "20px",color:'#9C9C9C' }}> <FaRupeeSign size={12} color="blue" />{data.MonthlySalary}</p>
                   <img
                     src="flag.png"
                     style={{
                       height: "30px",
                       width: "30px",
                       marginLeft: "20px",
+                      color:'#9C9C9C'
                     }}
                   />
                   <p>{data.JobLocation}</p>
@@ -301,13 +323,14 @@ const Homepage = () => {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginLeft: "7%",
+                    marginLeft: "40%",
+                    
                   }}
                 >
-                  <p style={{ color: "#ED5353" }}>{data.locationType}</p>
-                  <p style={{ color: "#ED5353", marginLeft: "10%" }}>
+                  <div style={{ color: "#ED5353"}}>{data.LocationType}</div>
+                  <div style={{ color: "#ED5353", marginLeft: "20%" }}>
                     {data.JobType}
-                  </p>
+                  </div>
                 </div>
               </div>
               <div
@@ -318,28 +341,33 @@ const Homepage = () => {
                   marginLeft: "40%",
                 }}
               >
-                <div>
-                  {data?.skills?.map((skill) => {
+                <div style={{display:'flex',flexDirection:'row',marginTop:'20px'}}>
+                  {data?.Skills?.map((skill) => {
                     return (
-                      <span className={styles.skill} key={skill}>
+                     
+                      <div key={skill} style={{height:'30px',width:'80px',background:'#FFEEEE',color:'black',marginLeft:'10px',textAlign:'center'}}>
                         {skill}
-                      </span>
+                      </div>
                     );
                   })}
                 </div>
                 <br />
-                {/* <div style={{marginLeft:'50%'}}>
-                            <button style={{background:'#ED5353',color:'white',height:'30px', width:'100px'}} 
-                                    onClick={() =>
-                                        navigate("/addjob", {
-                                            state: { id: data._id, edit: true }, 
-                                        })
-                                    }
-                                    className={edit}
+                <div style={{display:'flex',flexDirection:'row'}}>
+                {isLoggedIn && (
+                <div style={{marginLeft:'50%',marginTop:'30px'}}>
+                            <button style={{background:'white',color:'#ED5353',height:'30px', width:'100px',borderColor:'#ED5353',borderRadius:'5px'}} 
+                                    // onClick={() =>
+                                    //     navigate("/addjob", {
+                                    //         state: { id: data._id, edit: true }, 
+                                    //     })
+                                    // }
+                                  
                                 >
                                     Edit job
-                                </button> </div> */}
-                <div style={{ marginLeft: "50%" }}>
+                                </button> </div>
+                
+                )}
+                <div style={{ marginLeft: "5%",marginTop:'30px' }}>
                   <button
                     type="button"
                     style={{
@@ -347,11 +375,14 @@ const Homepage = () => {
                       color: "white",
                       height: "30px",
                       width: "100px",
+                      borderStyle:'none',
+                      borderRadius:'5px'
                     }}
                     onClick={() => handleView(data._id)}
                   >
                     View details
                   </button>
+                </div>
                 </div>
               </div>
             </div>

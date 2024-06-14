@@ -8,6 +8,7 @@ const UserLogin = async ({Email, Password}) => {
             Password,
         });
         localStorage.setItem("token", LogResponse.data.jwToken);
+        console.log(token);
         //console.log(LogResponse.data);
         return LogResponse.data.status;
     }catch(error) {
